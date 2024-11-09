@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<!--<link rel="stylesheet" href="dist/theme/black.css">-->
+		<link rel="stylesheet" href="dist/theme/white.css"/>
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						## Infrastucture as Code
+						Einführung in Azure und Terraform für angehende IT-Profis
+					</textarea>
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Was benutzen wir heute
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Azure
+
+							Note:
+							Was ist Azure?
+
+							• Azure ist die Cloud-Plattform von Microsoft. Sie ermöglicht es uns, digitale Ressourcen wie Server, Datenbanken und Websites bereitzustellen und zu verwalten – und das alles online.
+							• Stell dir Azure als eine Sammlung von virtuellen Rechenzentren weltweit vor, die wir nutzen können, um leistungsfähige, flexible IT-Infrastruktur bereitzustellen, ohne eigene Hardware kaufen zu müssen.
+							• Für Unternehmen und Entwickler ist Azure interessant, weil es skalierbar ist: Man kann Rechenleistung je nach Bedarf hinzufügen oder entfernen.
+
+							Warum nutzen wir Azure?
+
+							• Mit Azure lassen sich Anwendungen und Systeme sicher und effizient betreiben, ohne sich um physische Hardware kümmern zu müssen.
+							• Azure bietet globale Verfügbarkeit und hohe Sicherheit, was gerade für Unternehmen wichtig ist.
+							• Außerdem können wir mit Azure verschiedene Dienste für künstliche Intelligenz, Datenanalyse und sogar Gaming nutzen – das macht es auch für kreative und innovative Projekte spannend.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Container
+
+							Note:
+							Containerisierung ist eine Technik in der IT, die es uns ermöglicht, Anwendungen und deren Abhängigkeiten in einer Art „Container“ zu verpacken. Dadurch läuft die Anwendung zuverlässig und einheitlich, unabhängig davon, auf welchem Computer oder Server sie gestartet wird.
+
+							Was sind Container?
+
+							• Container enthalten alles, was eine Anwendung benötigt, um zu funktionieren – von Dateien über Bibliotheken bis hin zu Einstellungen.
+							• So wie Container in der Schifffahrt Waren sicher von einem Ort zum anderen transportieren, sorgt ein Software-Container dafür, dass eine Anwendung immer gleich funktioniert, egal wo sie ausgeführt wird.
+
+							Warum ist Containerisierung nützlich?
+
+							• Unabhängigkeit von der Umgebung: Eine Anwendung in einem Container läuft auf einem Laptop, einem Server oder in der Cloud auf die gleiche Weise.
+							• Effizienz und Flexibilität: Mehrere Container können auf einem einzigen Server laufen, was Ressourcen spart.
+							• Einfache Skalierbarkeit: Container können leicht vervielfältigt werden, um große Datenmengen oder viele Nutzer zu bewältigen.
+
+							Wo wird Containerisierung verwendet?
+
+							• Unternehmen nutzen Container oft für Microservices-Architekturen, wo jede Funktion einer App in einem eigenen Container läuft.
+							• Mit Tools wie Docker und Kubernetes werden Container in vielen modernen IT-Projekten eingesetzt, um die Entwicklung und Bereitstellung von Anwendungen zu vereinfachen.
+
+							Containerisierung ist also eine flexible, skalierbare und effiziente Methode, um Anwendungen sicher und einheitlich auszuführen – besonders nützlich für moderne Softwareentwicklung und Cloud-Computing!
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Terraform
+
+							Note:
+							Was ist Terraform?
+
+							• Terraform ist ein Tool zur Verwaltung von Infrastruktur. Es ermöglicht uns, Cloud-Ressourcen wie Server oder Netzwerke durch Code zu erstellen und zu verwalten – das nennt man „Infrastructure as Code“ (IaC).
+							• Stell dir vor, du schreibst eine Bauanleitung für deine Infrastruktur: Terraform nimmt diesen Code und setzt die Anweisungen in der Cloud um.
+							• Mit Terraform können wir genau festlegen, welche Ressourcen Azure erstellen soll. Dadurch behalten wir jederzeit den Überblick und können Änderungen einfach und sicher vornehmen.
+						</textarea>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Was wollen wir heute erreichen?
+
+						- Verstehen wie Terraform und Azure zusammen arbeiten
+						- Eigene Applikation als Container deployen
+
+						Note:
+						Demo App now
+					</textarea>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### Wie ist ein Terraform Plan aufgebaut
+
+							Note:
+							Ein Terraform-Plan ist in mehrere Blöcke unterteilt, die Ressourcen, Variablen, Provider und andere Konfigurationen definieren, um eine Cloud-Infrastruktur aufzubauen.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Provider
+
+							```hcl
+							provider "azurerm" {
+							features {}
+							}
+							```
+
+							Note:
+							Der Provider-Block definiert, welchen Cloud- oder Plattformanbieter du nutzen möchtest. Für Azure wäre das der azurerm-Provider.
+							Provider ermöglichen Terraform die Kommunikation mit verschiedenen Cloud-Diensten.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Variablen
+
+							```hcl
+							variable "resource_group_name" {
+							type = string
+							default = "mein-ressourcengruppe"
+							}
+							```
+
+							Note:
+							Variablen sind Platzhalter für Werte, die man ändern möchte, ohne den gesamten Plan zu bearbeiten.
+							Sie werden am Anfang definiert und können überall im Plan verwendet werden, um die Konfiguration flexibler und wiederverwendbar zu machen.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Ressourcen
+
+							```hcl
+							resource "azurerm_resource_group" "beispiel" {
+							name = var.resource_group_name
+							location = "West Europe"
+							}
+							```
+
+							Note:
+							Ressourcen sind der wichtigste Teil eines Terraform-Plans. Sie definieren die Cloud-Komponenten, die Terraform erstellen wird, wie virtuelle Maschinen, Datenbanken oder Speicherkonten.
+							Jede Ressource hat einen Typ (z.B. azurerm_resource_group für eine Azure-Resource Group) und einen Namen.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Outputs
+
+							```hcl
+							output "resource_group_name" {
+							value = azurerm_resource_group.beispiel.name
+							}
+							```
+
+							Note:
+							Outputs sind Ausgabewerte, die es ermöglichen, wichtige Informationen anzuzeigen, wie z.B. IP-Adressen oder Verbindungsdaten.
+							Outputs können genutzt werden, um die Werte bestimmter Eigenschaften nach der Erstellung der Infrastruktur abzurufen.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							### Terraform Plan
+
+							- Provider legen fest, mit wem Terraform kommuniziert.
+							- Variablen speichern Werte.
+							- Ressourcen beschreiben, was Terraform erstellen oder verwalten soll.
+							- Outputs geben Zugriff auf Werte nach der Bereitstellung.
+
+							Note:
+							- Provider legen fest, mit welchen Cloud-Diensten Terraform kommuniziert.
+							- Variablen speichern Werte zur Flexibilität und Wiederverwendbarkeit.
+							- Ressourcen beschreiben, was Terraform erstellen oder verwalten soll.
+							- Outputs geben Zugriff auf Werte und Informationen nach der Bereitstellung.
+						</textarea>
+					</section>
+				</section>
+
+				<!--	-->
+
+				<section data-markdown>
+					<textarea data-template>
+						##### Unser Plan
+						```hcl
+						# Configure the Azure provider
+						terraform {
+							required_providers {
+								azurerm = {
+									source = "hashicorp/azurerm"
+									version = "~> 4.7.0"
+								}
+							}
+							required_version = ">= 1.1.0"
+						}
+
+							variable "client_secret" { type = string }
+
+							provider "azurerm" {
+							features {}
+
+							client_id = "0521f1c1-c61a-4b52-a3cf-092ff229700d"
+							client_secret = var.client_secret
+							tenant_id = "3bf0542a-afe6-44a3-9078-c418aa3815a3"
+							subscription_id = "6a90b907-4713-481e-b7f5-ef56698a4a08"
+							}
+
+						# Load the existing Resource Group by name
+						data "azurerm_resource_group" "rg" {
+						name = "azure-terraform-learning-oct24-48566" # Replace with the actual name of the resource group
+						}
+
+						# Load the existing container app environment by name
+						data "azurerm_container_app_environment" "app_env" {
+							name = "Leaning-Environment"
+							resource_group_name = data.azurerm_resource_group.rg.name
+						}
+
+						# Generate a random integer to create a globally unique name
+						resource "random_integer" "ri" {
+							min = 10000
+							max = 99999
+						}
+
+						# Generate the container app
+						resource "azurerm_container_app" "hello-world-app" {
+							name = "hello-world-app-${random_integer.ri.result}"
+							container_app_environment_id = data.azurerm_container_app_environment.app_env.id
+							resource_group_name = data.azurerm_resource_group.rg.name
+							revision_mode = "Single"
+
+							template {
+								container {
+									name = "hello-world"
+									image = "docker.io/dannyt74/hello-express:v1"
+									cpu = 0.25
+									memory = "0.5Gi"
+								}
+							}
+
+							ingress {
+								target_port = 3000
+								external_enabled = true
+								traffic_weight {
+									latest_revision = true
+									percentage = 100
+								}
+							}
+						}
+
+						output "random_int" {
+							value = random_integer.ri.result
+						}
+
+						output "endpoint" {
+							value = azurerm_container_app.hello-world-app.ingress[0].fqdn
+						}
+						```
+					</textarea>
+				</section>
+
+				<!--	-->
+
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### Einen Plan ausfuehren
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### 1. Initialisieren
+
+							```shell
+							terraform init
+							```
+
+							Note:
+							Vor dem ersten ausfuehren muessen wir die Terraform Umgebung initialisieren.
+							Danach ist es nicht mehr noetig.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### 2. Planen
+
+							```shell
+							terraform plan -out app.plan
+							```
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### 3. Ausfuehren
+
+							```shell
+							terraform apply app.plan
+							```
+						</textarea>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Try yourself
+					</textarea>
+				</section>
+
+				<section data-markdown>
+						<textarea data-template>
+							### Terraform state
+
+							Note:
+
+						</textarea>
+					</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Wiederherstellung
+					</textarea>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Anpassungen
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							## Aufgabe 1
+
+							Deployt eine neue Version `v2`
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							## Aufgabe 2
+
+							Fügt eine neue Umgebungsvariable hinzu.
+
+							Dokumentation:
+							https://registry.terraform.io/providers/hashicorp/azurerm/
+							latest/docs/resources/container_app#env
+
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							## Lösung
+
+							```hcl
+
+							```
+						</textarea>
+					</section>
+				</section>
+
+				<section data-markdown>
+						<textarea data-template>
+							## Fragen?
+						</textarea>
+					</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes]
+			});
+		</script>
+	</body>
+</html>
