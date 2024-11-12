@@ -35,7 +35,7 @@ The password will be needed later on all student devices as well.
 ## Preparation of student devices
 
 - install Terraform [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- bookmark the documentatation website for the task
+- optionally, bookmark the [documentatation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_app#env-2) website for the task
 - check out the code repo and update the variables in `Training/main.tf`
 
 Open Powershell and set the provided client secret.

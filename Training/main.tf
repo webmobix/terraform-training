@@ -47,13 +47,9 @@ resource "azurerm_container_app" "hello-world-app" {
   template {
     container {
       name   = "hello-world"
-      image  = "docker.io/dannyt74/hello-express:v2"
+      image  = "docker.io/dannyt74/hello-express:v1"
       cpu    = 0.25
       memory = "0.5Gi"
-      env {
-        name = "SECRET"
-        value = "GEHEIMES_PASSWORD"
-      }
     }
   }
 
