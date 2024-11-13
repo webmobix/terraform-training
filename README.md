@@ -43,11 +43,22 @@ Open Powershell and set the provided client secret.
 ```powershell
 $env:TF_VAR_client_secret=
 ```
+You can check the environment variables with this command.
+
+```powershell
+dir env:
+```
 
 For Bash, set it like this.
 
 ```shell
 export TF_VAR_client_secret=
+```
+
+You can check the environment variables with this command.
+
+```shell
+env | sort
 ```
 
 ## Presenter preparation
